@@ -266,8 +266,7 @@
         async function submitRating() {
             const ratingValue = currentRating;
             try {
-                // Pastikan URL ini sama dengan URL server backend Anda
-                // Jika server.js berjalan di localhost:3000, maka ini benar
+                // URL ini sekarang relatif, cocok untuk Vercel monorepo atau rewrite
                 const response = await fetch('/api/submit-rating', {
                     method: 'POST',
                     headers: {
@@ -292,7 +291,7 @@
         // MODIFIKASI: Fungsi baru untuk memuat ringkasan dari backend
         async function loadRatingsAndSummarize() {
             try {
-                // Pastikan URL ini sama dengan URL server backend Anda
+                // URL ini sekarang relatif, cocok untuk Vercel monorepo atau rewrite
                 const response = await fetch('/api/get-rating-summary');
                 const data = await response.json();
                 if (response.ok) {
