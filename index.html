@@ -268,7 +268,7 @@
             try {
                 // Pastikan URL ini sama dengan URL server backend Anda
                 // Jika server.js berjalan di localhost:3000, maka ini benar
-                const response = await fetch('http://localhost:3000/api/submit-rating', {
+                const response = await fetch('/api/submit-rating', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -293,7 +293,7 @@
         async function loadRatingsAndSummarize() {
             try {
                 // Pastikan URL ini sama dengan URL server backend Anda
-                const response = await fetch('http://127.0.0.1:3000/api/get-rating-summary');
+                const response = await fetch('/api/get-rating-summary');
                 const data = await response.json();
                 if (response.ok) {
                     totalReviews = data.totalReviews;
