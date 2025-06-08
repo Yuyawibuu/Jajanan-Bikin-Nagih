@@ -209,6 +209,11 @@
         let totalReviews = 0;
         const ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }; // Objek untuk menyimpan jumlah per rating
 
+        // =========================================================================
+        // >>>>> INI ADALAH URL BACKEND ANDA YANG SUDAH KITA TEMUKAN <<<<<
+        const BASE_API_URL = 'https://gzpedewe-api.vercel.app/api'; 
+        // =========================================================================
+
         function updateReviewSummary() {
             document.getElementById('rating-count').textContent = totalReviews;
             for (let i = 1; i <= 5; i++) {
@@ -266,8 +271,8 @@
         async function submitRating() {
             const ratingValue = currentRating;
             try {
-                // URL ini sekarang relatif, cocok untuk Vercel monorepo atau rewrite
-                const response = await fetch('/api/submit-rating', {
+                // Menggunakan BASE_API_URL yang sudah didefinisikan
+                const response = await fetch(`${BASE_API_URL}/submit-rating`, { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -291,8 +296,8 @@
         // MODIFIKASI: Fungsi baru untuk memuat ringkasan dari backend
         async function loadRatingsAndSummarize() {
             try {
-                // URL ini sekarang relatif, cocok untuk Vercel monorepo atau rewrite
-                const response = await fetch('/api/get-rating-summary');
+                // Menggunakan BASE_API_URL yang sudah didefinisikan
+                const response = await await fetch(`${BASE_API_URL}/get-rating-summary`);
                 const data = await response.json();
                 if (response.ok) {
                     totalReviews = data.totalReviews;
@@ -307,7 +312,6 @@
                 }
             } catch (error) {
                 console.error("Error loading rating summary:", error);
-                // alert("Terjadi kesalahan koneksi saat memuat ringkasan penilaian. Pastikan server backend berjalan."); // Opsional: tampilkan alert
             }
         }
 
