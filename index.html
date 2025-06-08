@@ -297,7 +297,7 @@
         async function loadRatingsAndSummarize() {
             try {
                 // Menggunakan BASE_API_URL yang sudah didefinisikan
-                const response = await await fetch(`${BASE_API_URL}/get-rating-summary`);
+               const response = await fetch('https://gzpedewe-api.vercel.app/api/get-rating-summary');
                 const data = await response.json();
                 if (response.ok) {
                     totalReviews = data.totalReviews;
