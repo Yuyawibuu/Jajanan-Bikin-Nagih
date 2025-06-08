@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jajanan Bikin Nagih!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Jajanan Bikin Nagih!</h1>
+        <p>Pedasnya bikin ketagihan, rasanya bikin kangen!</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#seblak">Seblak</a></li>
+            <li><a href="#basreng-cobek">Basreng Cobek</a></li>
+            <li><a href="#mie-jebew">Mie Jebew</a></li>
+            <li><a href="#cimol">Cimol</a></li>
+            <li><a href="#order-form">Pesan Sekarang</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="seblak" class="jajanan-item">
+            <img src="https://via.placeholder.com/300x200?text=Seblak" alt="Gambar Seblak">
+            <h2>Seblak</h2>
+            <p class="description">Jajanan khas Bandung yang pedas gurih, dengan berbagai topping seperti kerupuk, makaroni, sosis, dan ceker. Tingkat kepedasannya bisa disesuaikan!</p>
+            <p class="price">Harga: Rp 5.000,-</p>
+            <button onclick="addOrderItem('Seblak')">Tambah ke Pesanan</button>
+        </section>
+
+        <section id="basreng-cobek" class="jajanan-item">
+            <img src="https://via.placeholder.com/300x200?text=Basreng+Cobek" alt="Gambar Basreng Cobek">
+            <h2>Basreng Cobek</h2>
+            <p class="description">Bakso goreng renyah yang disajikan dengan sambal cobek pedas segar. Sensasi pedas dan kriuknya bikin tidak bisa berhenti!</p>
+            <p class="price">Harga: Rp 5.000,-</p>
+            <button onclick="addOrderItem('Basreng Cobek')">Tambah ke Pesanan</button>
+        </section>
+
+        <section id="mie-jebew" class="jajanan-item">
+            <img src="https://via.placeholder.com/300x200?text=Mie+Jebew" alt="Gambar Mie Jebew">
+            <h2>Mie Jebew</h2>
+            <p class="description">Mie pedas dengan bumbu rahasia yang unik dan bikin nagih. Cocok buat Anda pecinta pedas sejati!</p>
+            <p class="price">Harga: Rp 5.000,-</p>
+            <button onclick="addOrderItem('Mie Jebew')">Tambah ke Pesanan</button>
+        </section>
+
+        <section id="cimol" class="jajanan-item">
+            <img src="https://via.placeholder.com/300x200?text=Cimol" alt="Gambar Cimol">
+            <h2>Cimol</h2>
+            <p class="description">Cimol kenyal dan gurih dengan taburan bumbu pedas atau keju. Enak disantap hangat-hangat sebagai camilan!</p>
+            <p class="price">Harga: Rp 5.000,-</p>
+            <button onclick="addOrderItem('Cimol')">Tambah ke Pesanan</button>
+        </section>
+    </main>
+
+    <section id="order-form">
+        <h2>Formulir Pemesanan</h2>
+        <div class="form-group">
+            <label for="customerName">Nama Anda:</label>
+            <input type="text" id="customerName" placeholder="Masukkan nama Anda" required>
+        </div>
+
+        <div class="form-group">
+            <label for="customerAddress">Alamat Lengkap:</label>
+            <textarea id="customerAddress" rows="3" placeholder="Contoh: Jl. Asia Afrika No. 123, Bandung" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Pilih Menu Anda:</label>
+            <div id="selected-items-display">
+                <p id="no-items-selected">Belum ada menu yang dipilih.</p>
+                <ul id="order-list"></ul>
+            </div>
+            <button class="clear-button" onclick="clearOrder()">Bersihkan Pilihan</button>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Catatan Tambahan (opsional):</label>
+            <textarea id="notes" rows="3" placeholder="Contoh: Seblak pedas sedang, tanpa ceker"></textarea>
+        </div>
+
+        <button id="whatsapp-order-button" onclick="sendWhatsAppOrder()">Pesan Sekarang via WhatsApp</button>
+    </section>
+
+    <section id="rating">
+        <h2>Beri Penilaian!</h2>
+        <img id="rating-emoji" src="rating3.png" alt="Emoji Reaksi">
+        <div class="rating-stars">
+            <span class="star" data-rating="1">★</span>
+            <span class="star" data-rating="2">★</span>
+            <span class="star" data-rating="3">★</span>
+            <span class="star" data-rating="4">★</span>
+            <span class="star" data-rating="5">★</span>
+        </div>
+        <p id="rating-text">Cukup Puas (3/5)</p>
+        <button onclick="submitRating()">Kirim Penilaian</button>
+    </section>
+
+    <section id="review-summary">
+        <h2>Ringkasan Penilaian</h2>
+        <p>Total penilaian yang masuk: <span id="rating-count">0</span></p>
+        <div class="review-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody id="rating-breakdown">
+                    <tr><td>1 Bintang</td><td id="rating-1-count">0</td></tr>
+                    <tr><td>2 Bintang</td><td id="rating-2-count">0</td></tr>
+                    <tr><td>3 Bintang</td><td id="rating-3-count">0</td></tr>
+                    <tr><td>4 Bintang</td><td id="rating-4-count">0</td></tr>
+                    <tr><td>5 Bintang</td><td id="rating-5-count">0</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Jajanan Bikin Nagih. Semua Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        // --- Bagian Pemesanan ---
+        const selectedItems = [];
+
+        function addOrderItem(itemName) {
+            selectedItems.push(itemName);
+            updateOrderList();
+            alert(`${itemName} berhasil ditambahkan ke pesanan!`);
+        }
+
+        function updateOrderList() {
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
+            if (selectedItems.length > 0) {
+                document.getElementById('no-items-selected').style.display = 'none';
+                selectedItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    orderList.appendChild(li);
+                });
+            } else {
+                document.getElementById('no-items-selected').style.display = 'block';
+            }
+        }
+
+        function clearOrder() {
+            selectedItems.length = 0;
+            updateOrderList();
+            alert('Daftar pesanan telah dibersihkan.');
+        }
+
+        function sendWhatsAppOrder() {
+            const customerName = document.getElementById('customerName').value.trim();
+            const customerAddress = document.getElementById('customerAddress').value.trim();
+            const notes = document.getElementById('notes').value.trim();
+            const phoneNumber = '62895386863049'; // Nomor WA tujuan
+
+            if (!customerName) {
+                alert('Nama Anda harus diisi sebelum memesan!');
+                return;
+            }
+
+            if (!customerAddress) {
+                alert('Alamat Lengkap harus diisi sebelum memesan!');
+                return;
+            }
+
+            if (selectedItems.length === 0) {
+                alert('Pilih setidaknya satu menu untuk memesan!');
+                return;
+            }
+
+            let totalHarga = selectedItems.length * 5000;
+            let orderMessage = `Halo Jajanan Bikin Nagih!\n\n`;
+            orderMessage += `Saya ${customerName},\n`;
+            orderMessage += `Alamat: ${customerAddress}\n\n`;
+            orderMessage += `Ingin memesan:\n`;
+            selectedItems.forEach(item => {
+                orderMessage += `- ${item} (Rp 5.000,-)\n`;
+            });
+            orderMessage += `\nTotal Harga: Rp ${totalHarga.toLocaleString('id-ID')},-`;
+
+            if (notes) {
+                orderMessage += `\nCatatan: ${notes}`;
+            }
+
+            orderMessage += `\n\nMohon konfirmasi pesanan saya. Terima kasih!`;
+
+            const encodedMessage = encodeURIComponent(orderMessage);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // --- Bagian Rating ---
+        const stars = document.querySelectorAll('.rating-stars .star');
+        const ratingText = document.getElementById('rating-text');
+        const ratingEmoji = document.getElementById('rating-emoji');
+        let currentRating = 3; // Nilai rating awal
+
+        // --- Bagian untuk Penghitung Penilaian (akan diisi dari backend) ---
+        let totalReviews = 0;
+        const ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }; // Objek untuk menyimpan jumlah per rating
+
+        function updateReviewSummary() {
+            document.getElementById('rating-count').textContent = totalReviews;
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`rating-${i}-count`).textContent = ratingCounts[i];
+            }
+        }
+
+        function updateRating(rating) {
+            currentRating = rating;
+            stars.forEach(star => star.classList.remove('active'));
+            for (let i = 0; i < rating; i++) {
+                stars.item(i).classList.add('active');
+            }
+
+            let text = "";
+            let emojiSrc = "";
+            if (rating == 1) {
+                text = "Sangat Tidak Puas";
+                emojiSrc = "rating1.png"; // Jalur gambar tanpa folder images/
+            } else if (rating == 2) {
+                text = "Kurang Puas";
+                emojiSrc = "rating2.png"; // Jalur gambar tanpa folder images/
+            } else if (rating == 3) {
+                text = "Cukup Puas";
+                emojiSrc = "rating3.png"; // Jalur gambar tanpa folder images/
+            } else if (rating == 4) {
+                text = "Puas";
+                emojiSrc = "rating4.png"; // Jalur gambar tanpa folder images/
+            } else if (rating == 5) {
+                text = "Sangat Puas";
+                emojiSrc = "rating5.png"; // Jalur gambar tanpa folder images/
+            }
+            ratingText.textContent = `${text} (${rating}/5)`;
+            ratingEmoji.src = emojiSrc;
+        }
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                updateRating(rating);
+            });
+            star.addEventListener('mouseover', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                stars.forEach(s => s.classList.remove('hover'));
+                for (let i = 0; i < rating; i++) {
+                    stars.item(i).classList.add('hover');
+                }
+            });
+            star.addEventListener('mouseout', function() {
+                stars.forEach(s => s.classList.remove('hover'));
+            });
+        });
+
+        // MODIFIKASI: Fungsi submitRating() sekarang mengirim data ke backend
+        async function submitRating() {
+            const ratingValue = currentRating;
+            try {
+                // Pastikan URL ini sama dengan URL server backend Anda
+                // Jika server.js berjalan di localhost:3000, maka ini benar
+                const response = await fetch('http://localhost:3000/api/submit-rating', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ rating: ratingValue })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`Terima kasih atas penilaian Anda: ${ratingValue}/5! ${data.message}`);
+                    loadRatingsAndSummarize(); // Muat ulang ringkasan setelah submit agar data terbaru muncul
+                } else {
+                    alert(`Gagal mengirim penilaian: ${data.message}`);
+                }
+            } catch (error) {
+                console.error("Error submitting rating:", error);
+                alert("Terjadi kesalahan koneksi saat mengirim penilaian. Pastikan server backend berjalan.");
+            }
+        }
+
+        // MODIFIKASI: Fungsi baru untuk memuat ringkasan dari backend
+        async function loadRatingsAndSummarize() {
+            try {
+                // Pastikan URL ini sama dengan URL server backend Anda
+                const response = await fetch('http://127.0.0.1:3000/api/get-rating-summary');
+                const data = await response.json();
+                if (response.ok) {
+                    totalReviews = data.totalReviews;
+                    ratingCounts[1] = data.ratingCounts[1];
+                    ratingCounts[2] = data.ratingCounts[2];
+                    ratingCounts[3] = data.ratingCounts[3];
+                    ratingCounts[4] = data.ratingCounts[4];
+                    ratingCounts[5] = data.ratingCounts[5];
+                    updateReviewSummary(); // Perbarui tampilan di HTML
+                } else {
+                    console.error("Gagal memuat ringkasan penilaian:", data.message);
+                }
+            } catch (error) {
+                console.error("Error loading rating summary:", error);
+                // alert("Terjadi kesalahan koneksi saat memuat ringkasan penilaian. Pastikan server backend berjalan."); // Opsional: tampilkan alert
+            }
+        }
+
+        // Panggil fungsi inisialisasi saat halaman dimuat
+        updateRating(currentRating); // Inisialisasi tampilan rating awal
+        loadRatingsAndSummarize(); // Muat dan tampilkan ringkasan dari backend saat halaman pertama kali dimuat
+    </script>
+</body>
+</html>
