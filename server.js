@@ -19,7 +19,7 @@ app.use(express.json()); // Untuk mem-parse JSON dari request body
 // CORS configuration: Memungkinkan frontend di domain lain (misalnya http://localhost:5500 dari Live Server)
 // untuk mengakses backend ini.
 app.use(cors({
-    origin: 'http://127.0.0.1:5500' // Ganti ini dengan URL frontend Anda saat deploy (misalnya: https://nama-aplikasi-anda.vercel.app)
+    origin: 'https://jajanan-bikin-nagih.vercel.app' // Ganti ini dengan URL frontend Anda saat deploy (misalnya: https://nama-aplikasi-anda.vercel.app)
 }));
 
 // Fungsi untuk koneksi ke MongoDB Atlas
