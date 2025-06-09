@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
@@ -6,8 +5,12 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// >>>>> GANTI CONNECTION STRING DENGAN YANG VALID <<<<<
-const uri = "mongodb+srv://gzpedewe:gVQDwtDKBKWjvvnW@cluster0.9tzcust.mongodb.net/jajanan_ratings?retryWrites=true&w=majority&appName=Cluster0";
+// Ambil connection string dari environment variable MONGODB_URI
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+    console.error("ERROR: Environment variable MONGODB_URI belum di-set!");
+    process.exit(1);
+}
 const client = new MongoClient(uri);
 
 // Middleware
